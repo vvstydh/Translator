@@ -10,18 +10,28 @@ abstract class MechWork with Store{
   @observable
   bool istext = false;
 
-  @override
+  @observable
   double contmargin = 0;
 
+  @observable
+  var fromlang = 'русский';
+
+  @observable
+  var tolang = 'английский';
+
   @action
-  void move(){
-    if (text != ''){
-      istext = true;
-      contmargin = 300;
+  void move(var texting){
+    if (texting != ''){
+      contmargin = 200;
           }
-    else if(text == ''){
-      istext = false;
-      contmargin = 3000;
+    else if(texting == ''){
+      contmargin = 0;
     }
+  }
+  @action
+  void changelanguage(){
+    var change = fromlang;
+    fromlang = tolang;
+    tolang = change;
   }
 }

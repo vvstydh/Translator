@@ -39,15 +39,72 @@ mixin _$Mech on MechWork, Store {
     });
   }
 
+  late final _$contmarginAtom =
+      Atom(name: 'MechWork.contmargin', context: context);
+
+  @override
+  double get contmargin {
+    _$contmarginAtom.reportRead();
+    return super.contmargin;
+  }
+
+  @override
+  set contmargin(double value) {
+    _$contmarginAtom.reportWrite(value, super.contmargin, () {
+      super.contmargin = value;
+    });
+  }
+
+  late final _$fromlangAtom = Atom(name: 'MechWork.fromlang', context: context);
+
+  @override
+  String get fromlang {
+    _$fromlangAtom.reportRead();
+    return super.fromlang;
+  }
+
+  @override
+  set fromlang(String value) {
+    _$fromlangAtom.reportWrite(value, super.fromlang, () {
+      super.fromlang = value;
+    });
+  }
+
+  late final _$tolangAtom = Atom(name: 'MechWork.tolang', context: context);
+
+  @override
+  String get tolang {
+    _$tolangAtom.reportRead();
+    return super.tolang;
+  }
+
+  @override
+  set tolang(String value) {
+    _$tolangAtom.reportWrite(value, super.tolang, () {
+      super.tolang = value;
+    });
+  }
+
   late final _$MechWorkActionController =
       ActionController(name: 'MechWork', context: context);
 
   @override
-  void move() {
+  void move(dynamic texting) {
     final _$actionInfo =
         _$MechWorkActionController.startAction(name: 'MechWork.move');
     try {
-      return super.move();
+      return super.move(texting);
+    } finally {
+      _$MechWorkActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changelanguage() {
+    final _$actionInfo =
+        _$MechWorkActionController.startAction(name: 'MechWork.changelanguage');
+    try {
+      return super.changelanguage();
     } finally {
       _$MechWorkActionController.endAction(_$actionInfo);
     }
@@ -57,7 +114,10 @@ mixin _$Mech on MechWork, Store {
   String toString() {
     return '''
 text: ${text},
-istext: ${istext}
+istext: ${istext},
+contmargin: ${contmargin},
+fromlang: ${fromlang},
+tolang: ${tolang}
     ''';
   }
 }
