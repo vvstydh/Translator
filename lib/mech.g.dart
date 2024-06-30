@@ -111,6 +111,28 @@ mixin _$Mech on MechWork, Store {
   }
 
   @override
+  void addtohistory() {
+    final _$actionInfo =
+        _$MechWorkActionController.startAction(name: 'MechWork.addtohistory');
+    try {
+      return super.addtohistory();
+    } finally {
+      _$MechWorkActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removefromhistory() {
+    final _$actionInfo = _$MechWorkActionController.startAction(
+        name: 'MechWork.removefromhistory');
+    try {
+      return super.removefromhistory();
+    } finally {
+      _$MechWorkActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 text: ${text},

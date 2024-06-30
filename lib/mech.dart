@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:my_task_2/history.dart';
+
 part 'mech.g.dart';
 
 class Mech = MechWork with _$Mech;
@@ -23,9 +23,6 @@ abstract class MechWork with Store {
   @observable
   var tolang = 'английский';
 
-  @observable
-  List<Widget> historywidgets = [];
-
   @action
   void move(var texting) {
     if (texting != '') {
@@ -46,6 +43,11 @@ abstract class MechWork with Store {
 
   @action
   void addtohistory(){
-    historywidgets.add(his.historycont(text, fromlang, tolang));
+    
   }
+
+  @action
+  void removefromhistory(){
+    
+  } 
 }
