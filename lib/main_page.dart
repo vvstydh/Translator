@@ -4,10 +4,13 @@ import 'package:my_task_2/history.dart';
 import 'package:flutter/services.dart';
 import 'package:my_task_2/mech.dart';
 
+
+
 class MainPage extends StatelessWidget {
   final TextEditingController clear = TextEditingController();
   final History h = History();
   final Mech mech = Mech();
+  
 
   MainPage({super.key});
 
@@ -26,7 +29,7 @@ class MainPage extends StatelessWidget {
                   style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
                 ),
               )),
-          body: Column(
+              body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
@@ -289,7 +292,8 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ],
-          )),
+          )
+          ),
     );
   }
 }

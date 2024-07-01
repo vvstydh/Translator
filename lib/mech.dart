@@ -44,13 +44,13 @@ abstract class MechWork with Store {
     tolang = change;
   }
 
-  @action
+   @action
   void addtohistory(){
-    transationhistory.add(his.historycont(text, fromlang, tolang));
+    
   }
 
   @action
   void removefromhistory(){
-    transationhistory.remove(his.historycont(text, fromlang, tolang));    
+       
   } 
 }

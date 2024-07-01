@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_task_2/mech.dart';
 
-class History {
-  final Mech mech = Mech();
 
-  Widget historycont(var text, var fromlang, var tolang) {
+
+class History {  
+  
+
+  Widget historycont(var text, var fromlang, var tolang, VoidCallback onPressed) {
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -26,7 +27,7 @@ class History {
                     color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: onPressed,
                   icon: const Icon(
                     Icons.close,
                     color: Color.fromARGB(255, 131, 131, 131),
