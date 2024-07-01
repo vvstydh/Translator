@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_task_2/mech.dart';
 
 class History {
-
-
+  final Mech mech = Mech();
 
   Widget historycont(var text, var fromlang, var tolang) {
     return Container(
@@ -27,9 +26,7 @@ class History {
                     color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
               ),
               IconButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   icon: const Icon(
                     Icons.close,
                     color: Color.fromARGB(255, 131, 131, 131),
