@@ -7,7 +7,6 @@ part 'mech.g.dart';
 class Mech = MechWork with _$Mech;
 
 abstract class MechWork with Store {
-  final History his = History();
 
   @observable
   var text = '';
@@ -46,7 +45,7 @@ abstract class MechWork with Store {
 
    @action
   void addtohistory(){
-    
+    transationhistory.add(HistoryWidget(fromLang: fromlang, onClick: removefromhistory, text: text, toLang: tolang));
   }
 
   @action

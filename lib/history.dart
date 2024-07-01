@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 
 
 
-class History {  
-  
+class HistoryWidget extends StatelessWidget {
+  final String text;
+  final String fromLang;
+  final String toLang;
+  final VoidCallback? onClick;
+  const HistoryWidget({
+    super.key, required this.fromLang, required this.onClick,
+    required this.text, required this.toLang,
+  });
 
-  Widget historycont(var text, var fromlang, var tolang, VoidCallback onPressed) {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -22,12 +30,12 @@ class History {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '$fromlang → $tolang',
+                '$fromLang → $toLang',
                 style: const TextStyle(
                     color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
               ),
               IconButton(
-                  onPressed: onPressed,
+                  onPressed: onClick,
                   icon: const Icon(
                     Icons.close,
                     color: Color.fromARGB(255, 131, 131, 131),

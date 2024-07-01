@@ -8,7 +8,6 @@ import 'package:my_task_2/mech.dart';
 
 class MainPage extends StatelessWidget {
   final TextEditingController clear = TextEditingController();
-  final History h = History();
   final Mech mech = Mech();
   
 
@@ -217,11 +216,18 @@ class MainPage extends StatelessWidget {
                         color: Color.fromARGB(255, 131, 131, 131),
                         fontSize: 25),
                   )),
-              Expanded(child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return const ListTile();
-                },
-              )),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: 10,
+                  separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                  itemBuilder: (context, index) => HistoryWidget(
+                    fromLang: 'fromLang', 
+                    onClick: (){}, 
+                    text: 'text', 
+                    toLang: 'toLang',
+                  ),
+                ),
+              ),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
