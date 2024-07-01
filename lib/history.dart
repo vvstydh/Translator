@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class HistoryWidget extends StatelessWidget {
   final String text;
   final String fromLang;
@@ -48,11 +46,11 @@ class HistoryWidget extends StatelessWidget {
             color: const Color.fromARGB(255, 131, 131, 131),
           ),
           Text(
-            '$text',
+            text,
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            '$text',
+            text,
             style: const TextStyle(
                 color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
           )

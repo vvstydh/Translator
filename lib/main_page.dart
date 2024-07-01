@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:my_task_2/history.dart';
 import 'package:flutter/services.dart';
 import 'package:my_task_2/mech.dart';
-
-
 
 class MainPage extends StatelessWidget {
   final TextEditingController clear = TextEditingController();
   final Mech mech = Mech();
-  
 
   MainPage({super.key});
 
@@ -28,7 +24,7 @@ class MainPage extends StatelessWidget {
                   style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
                 ),
               )),
-              body: Column(
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
@@ -88,6 +84,7 @@ class MainPage extends StatelessWidget {
                                           child: IconButton(
                                               onPressed: () {
                                                 mech.move(clear.text = '');
+                                                mech.addtohistory();
                                               },
                                               icon: const Icon(
                                                 Icons.close,
@@ -177,6 +174,7 @@ class MainPage extends StatelessWidget {
                                       child: IconButton(
                                           onPressed: () {
                                             mech.move(clear.text = '');
+                                            mech.addtohistory();
                                           },
                                           icon: const Icon(
                                             Icons.close,
@@ -216,18 +214,14 @@ class MainPage extends StatelessWidget {
                         color: Color.fromARGB(255, 131, 131, 131),
                         fontSize: 25),
                   )),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: 10,
-                  separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                  itemBuilder: (context, index) => HistoryWidget(
-                    fromLang: 'fromLang', 
-                    onClick: (){}, 
-                    text: 'text', 
-                    toLang: 'toLang',
-                  ),
-                ),
-              ),
+              Observer(
+                  builder: (_) => Expanded(
+                          child: ListView.builder(
+                        itemCount: mech.transationhistory.length,
+                        itemBuilder: (context, index) {
+                          return mech.transationhistory[index];
+                        },
+                      ))),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -298,8 +292,7 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ],
-          )
-          ),
+          )),
     );
   }
 }
