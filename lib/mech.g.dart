@@ -85,21 +85,6 @@ mixin _$Mech on MechWork, Store {
     });
   }
 
-  late final _$idAtom = Atom(name: 'MechWork.id', context: context);
-
-  @override
-  int get id {
-    _$idAtom.reportRead();
-    return super.id;
-  }
-
-  @override
-  set id(int value) {
-    _$idAtom.reportWrite(value, super.id, () {
-      super.id = value;
-    });
-  }
-
   late final _$MechWorkActionController =
       ActionController(name: 'MechWork', context: context);
 
@@ -154,8 +139,7 @@ text: ${text},
 istext: ${istext},
 contmargin: ${contmargin},
 fromlang: ${fromlang},
-tolang: ${tolang},
-id: ${id}
+tolang: ${tolang}
     ''';
   }
 }

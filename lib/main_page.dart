@@ -69,15 +69,15 @@ class MainPage extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                          child: Observer(
-                                              builder: (_) => Text(
-                                                    mech.text,
-                                                    maxLines: 2,
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20),
-                                                  ))),
+                                      Observer(
+                                          builder: (_) => Expanded(
+                                                  child: Text(
+                                                mech.text,
+                                                maxLines: 2,
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20),
+                                              ))),
                                       AnimatedOpacity(
                                           opacity: mech.istext ? 1.0 : 0.0,
                                           duration: const Duration(seconds: 0),
@@ -226,7 +226,6 @@ class MainPage extends StatelessWidget {
                                   mech.transationhistory.length - 1 - index;
                               final historyItem =
                                   mech.transationhistory[reversedIndex];
-
                               return HistoryWidget(
                                 fromLang: historyItem.fromLang,
                                 onClick: () {
@@ -259,62 +258,64 @@ class MainPage extends StatelessWidget {
                           width: 3,
                         ))),
                 child: Stack(
-  alignment: Alignment.center,
-  children: [
-    Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25), // Увеличиваем padding, чтобы учесть кнопку
-      height: 50,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 25, 25, 25),
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Observer(
-            builder: (_) => Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 35), // Достаточный отступ для кнопки
-                child: Text(
-                  mech.fromlang,
-                  style: const TextStyle(color: Colors.white, fontSize: 15),
-                  textAlign: TextAlign.center,
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 25, 25, 25),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Observer(
+                            builder: (_) => Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 35),
+                                child: Text(
+                                  mech.fromlang,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Observer(
+                            builder: (_) => Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 35),
+                                child: Text(
+                                  mech.tolang,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    CircleAvatar(
+                      radius: 35,
+                      backgroundColor: const Color.fromARGB(255, 53, 79, 248),
+                      child: IconButton(
+                        onPressed: () {
+                          mech.changelanguage();
+                        },
+                        icon: const Icon(
+                          Icons.autorenew,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ),
-          Observer(
-            builder: (_) => Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 35), // Достаточный отступ для кнопки
-                child: Text(
-                  mech.tolang,
-                  style: const TextStyle(color: Colors.white, fontSize: 15),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ), CircleAvatar(
-        radius: 35, // Уменьшите радиус, если необходимо
-        backgroundColor: const Color.fromARGB(255, 53, 79, 248),
-        child: IconButton(
-          onPressed: () {
-            mech.changelanguage();
-          },
-          icon: const Icon(
-            Icons.autorenew,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
-      ),
-  ],
-),
-
               ),
             ],
           )),

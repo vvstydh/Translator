@@ -21,9 +21,6 @@ abstract class MechWork with Store {
   @observable
   var tolang = 'английский';
 
-  @observable
-  int id = 0;
-
   ObservableList<HistoryData> transationhistory = ObservableList<HistoryData>();
 
   @action
@@ -46,7 +43,7 @@ abstract class MechWork with Store {
 
   @action
   void addtohistory() {
-    transationhistory.add(HistoryData(id: id, fromLang: fromlang, text: text, toLang: tolang));
+    transationhistory.add(HistoryData(fromLang: fromlang, text: text, toLang: tolang));
   }
 
   @action
