@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HistoryWidget extends StatelessWidget {
+  final int id;
   final String text;
   final String fromLang;
   final String toLang;
   final VoidCallback? onClick;
   const HistoryWidget({
     super.key, required this.fromLang, required this.onClick,
-    required this.text, required this.toLang,
+    required this.text, required this.toLang, required this.id,
   });
 
   @override

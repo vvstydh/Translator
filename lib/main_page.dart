@@ -219,7 +219,7 @@ class MainPage extends StatelessWidget {
                           child: ListView.builder(
                         itemCount: mech.transationhistory.length,
                         itemBuilder: (context, index) {
-                          return mech.transationhistory[index];
+                          return mech.transationhistory[index].widget;
                         },
                       ))),
               Container(
