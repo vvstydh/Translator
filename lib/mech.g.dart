@@ -137,11 +137,11 @@ mixin _$Mech on MechWork, Store {
   }
 
   @override
-  void removefromhistory(int id) {
+  void removefromhistory(int Id, String Ttext, String Fromlang, String Tolang) {
     final _$actionInfo = _$MechWorkActionController.startAction(
         name: 'MechWork.removefromhistory');
     try {
-      return super.removefromhistory(id);
+      return super.removefromhistory(Id, Ttext, Fromlang, Tolang);
     } finally {
       _$MechWorkActionController.endAction(_$actionInfo);
     }

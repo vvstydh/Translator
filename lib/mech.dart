@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:my_task_2/history.dart';
 import 'package:my_task_2/historydata.dart';
@@ -53,14 +52,19 @@ abstract class MechWork with Store {
         id: id,
         widget: HistoryWidget(
             fromLang: fromlang,
-            onClick: () => removefromhistory(id),
+            mech: Mech(),
             text: text,
             toLang: tolang,
             id: id,)));
   }
 
   @action
-  void removefromhistory(int id) {
-    
+  void removefromhistory(int Id, String Ttext, String Fromlang, String Tolang) {
+    transationhistory.remove(HistoryData(id: Id, widget: HistoryWidget(
+            fromLang: Fromlang,
+            mech: Mech(),
+            text: Ttext,
+            toLang: Tolang,
+            id: Id,)));
   }
 }
