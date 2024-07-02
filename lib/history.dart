@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:my_task_2/mech.dart';
+
+
 
 class HistoryWidget extends StatelessWidget {
-  final int id;
   final String text;
   final String fromLang;
   final String toLang;
-  const HistoryWidget(
-      {super.key,
-      required this.fromLang,
-      required this.text,
-      required this.toLang,
-      required this.id,
-      required this.mech});
-  final Mech mech;
+  final VoidCallback? onClick;
+  const HistoryWidget({
+    super.key, required this.fromLang, required this.onClick,
+    required this.text, required this.toLang,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +35,7 @@ class HistoryWidget extends StatelessWidget {
                     color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
               ),
               IconButton(
-                  onPressed: () {
-                    mech.removefromhistory(id, text, fromLang, toLang);
-                  },
+                  onPressed: onClick,
                   icon: const Icon(
                     Icons.close,
                     color: Color.fromARGB(255, 131, 131, 131),

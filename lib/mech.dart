@@ -1,5 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:my_task_2/history.dart';
 import 'package:my_task_2/historydata.dart';
 
 part 'mech.g.dart';
@@ -47,24 +46,11 @@ abstract class MechWork with Store {
 
   @action
   void addtohistory() {
-    id++;
-    transationhistory.add(HistoryData(
-        id: id,
-        widget: HistoryWidget(
-            fromLang: fromlang,
-            mech: Mech(),
-            text: text,
-            toLang: tolang,
-            id: id,)));
+    transationhistory.add(HistoryData(id: id, fromLang: fromlang, text: text, toLang: tolang));
   }
 
   @action
-  void removefromhistory(int Id, String Ttext, String Fromlang, String Tolang) {
-    transationhistory.remove(HistoryData(id: Id, widget: HistoryWidget(
-            fromLang: Fromlang,
-            mech: Mech(),
-            text: Ttext,
-            toLang: Tolang,
-            id: Id,)));
+  void removefromhistory(int index) {
+    transationhistory.removeAt(index);
   }
 }

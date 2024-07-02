@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:my_task_2/history.dart';
 import 'package:flutter/services.dart';
 import 'package:my_task_2/mech.dart';
 
@@ -68,12 +69,11 @@ class MainPage extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Flexible(
-                                          flex: 3,
+                                      Expanded(
                                           child: Observer(
                                               builder: (_) => Text(
                                                     mech.text,
-                                                    maxLines: 3,
+                                                    maxLines: 2,
                                                     style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 20),
@@ -142,8 +142,7 @@ class MainPage extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Flexible(
-                                flex: 5,
+                              Expanded(
                                 child: TextField(
                                   controller: clear,
                                   onChanged: (text) {
@@ -216,12 +215,28 @@ class MainPage extends StatelessWidget {
                   )),
               Observer(
                   builder: (_) => Expanded(
-                          child: ListView.builder(
-                        itemCount: mech.transationhistory.length,
-                        itemBuilder: (context, index) {
-                          return mech.transationhistory[index].widget;
-                        },
-                      ))),
+                        child: ListView.separated(
+                            itemCount: mech.transationhistory.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            itemBuilder: (context, index) {
+                              final reversedIndex =
+                                  mech.transationhistory.length - 1 - index;
+                              final historyItem =
+                                  mech.transationhistory[reversedIndex];
+
+                              return HistoryWidget(
+                                fromLang: historyItem.fromLang,
+                                onClick: () {
+                                  mech.removefromhistory(reversedIndex);
+                                },
+                                text: historyItem.text,
+                                toLang: historyItem.toLang,
+                              );
+                            }),
+                      )),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -244,52 +259,62 @@ class MainPage extends StatelessWidget {
                           width: 3,
                         ))),
                 child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      height: 50,
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 25, 25, 25),
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                      ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Observer(
-                                builder: (_) => Text(
-                                      mech.fromlang,
-                                      style: const TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 131, 131, 131),
-                                          fontSize: 15),
-                                    )),
-                            Observer(
-                              builder: (_) => Text(
-                                mech.tolang,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 131, 131, 131),
-                                    fontSize: 15),
-                              ),
-                            )
-                          ]),
-                    ),
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundColor: const Color.fromARGB(255, 53, 79, 248),
-                      child: IconButton(
-                          onPressed: () {
-                            mech.changelanguage();
-                          },
-                          icon: const Icon(
-                            Icons.autorenew,
-                            color: Colors.white,
-                            size: 35,
-                          )),
-                    )
-                  ],
+  alignment: Alignment.center,
+  children: [
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 25), // Увеличиваем padding, чтобы учесть кнопку
+      height: 50,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 25, 25, 25),
+        borderRadius: BorderRadius.all(Radius.circular(30)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Observer(
+            builder: (_) => Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 35), // Достаточный отступ для кнопки
+                child: Text(
+                  mech.fromlang,
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                  textAlign: TextAlign.center,
                 ),
+              ),
+            ),
+          ),
+          Observer(
+            builder: (_) => Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 35), // Достаточный отступ для кнопки
+                child: Text(
+                  mech.tolang,
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ), CircleAvatar(
+        radius: 35, // Уменьшите радиус, если необходимо
+        backgroundColor: const Color.fromARGB(255, 53, 79, 248),
+        child: IconButton(
+          onPressed: () {
+            mech.changelanguage();
+          },
+          icon: const Icon(
+            Icons.autorenew,
+            color: Colors.white,
+            size: 35,
+          ),
+        ),
+      ),
+  ],
+),
+
               ),
             ],
           )),
