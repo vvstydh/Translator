@@ -15,7 +15,7 @@ class MainPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: const Color(0x000d0d0d),
+          backgroundColor: const Color.fromARGB(255, 13, 13, 13),
           appBar: AppBar(
               surfaceTintColor: const Color.fromARGB(255, 25, 25, 25),
               backgroundColor: const Color.fromARGB(255, 25, 25, 25),
