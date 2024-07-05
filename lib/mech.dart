@@ -27,7 +27,7 @@ abstract class MechWork with Store {
   void move(var texting) {
     if (texting != '') {
       istext = true;
-      contmargin = 200;
+      contmargin = 180;
     } else if (texting == '') {
       istext = false;
       contmargin = 0;
@@ -43,7 +43,8 @@ abstract class MechWork with Store {
 
   @action
   void addtohistory() {
-    transationhistory.add(HistoryData(fromLang: fromlang, text: text, toLang: tolang));
+    transationhistory
+        .add(HistoryData(fromLang: fromlang, text: text, toLang: tolang));
   }
 
   @action

@@ -95,12 +95,12 @@ flutter_native_splash:
   image: assets/splash.png
   android: true
   ios: true
-  web: true
+  web: false
+
   android_12:
     color: "#0d0d0d"
-    image: assets/splash.png
-    branding: assets/splash2.png
-    android_gravity: center
+    image: assets/splash3.png
+    android_gravity: fit
   
   
 flutter_launcher_icons:
