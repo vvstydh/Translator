@@ -10,6 +10,9 @@ abstract class MechWork with Store {
   var text = '';
 
   @observable
+  var translatedtext = '';
+
+  @observable
   bool istext = false;
 
   @observable
@@ -22,6 +25,7 @@ abstract class MechWork with Store {
   var tolang = 'английский';
 
   ObservableList<HistoryData> transationhistory = ObservableList<HistoryData>();
+  
 
   @action
   void move(var texting) {

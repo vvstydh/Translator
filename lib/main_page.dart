@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:my_task_2/history.dart';
 import 'package:flutter/services.dart';
 import 'package:my_task_2/mech.dart';
+import 'package:my_task_2/repos/translate.dart';
 
 class MainPage extends StatelessWidget {
   final TextEditingController clear = TextEditingController();
@@ -70,14 +71,8 @@ class MainPage extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Observer(
-                                            builder: (_) => Expanded(
-                                                    child: Text(
-                                                  mech.text,
-                                                  maxLines: 2,
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 20),
-                                                ))),
+                                            builder: (_) =>
+                                                Expanded(child: Translate())),
                                         AnimatedOpacity(
                                             opacity: mech.istext ? 1.0 : 0.0,
                                             duration:
@@ -148,9 +143,10 @@ class MainPage extends StatelessWidget {
                                 Expanded(
                                   child: TextField(
                                     controller: clear,
-                                    onChanged: (text) {
-                                      mech.text = text;
-                                      mech.move(text);
+                                    onChanged: (textik) {
+                                      mech.text = textik;
+                                      mech.move(textik);
+                                      Translate().getTranslate(textik);
                                     },
                                     cursorColor:
                                         const Color.fromARGB(255, 46, 68, 211),
@@ -206,60 +202,70 @@ class MainPage extends StatelessWidget {
                             )
                           ]),
                     ),
-                    DraggableScrollableSheet(
-                      initialChildSize: 0.45,
-                      maxChildSize: 1,
-                      minChildSize: 0.45,
-                        builder: (context, scrollController) {
-                          return Container(
-                              decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 13, 13, 13),
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(30)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      margin: const EdgeInsets.fromLTRB(
-                                          30, 30, 30, 10),
-                                      child: const Text(
-                                        'История переводов',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 131, 131, 131),
-                                            fontSize: 25),
-                                      )),
-                                  Observer(
-                                      builder: (_) => Expanded(
-                                            child: ListView.builder(
-                                                controller: scrollController,
-                                                itemCount: mech
-                                                    .transationhistory.length,
-                                                itemBuilder: (context, index) {
-                                                  final reversedIndex = mech
+                    Observer(
+                      builder: (_) => (mech.transationhistory.isEmpty)
+                          ? const SizedBox()
+                          : DraggableScrollableSheet(
+                              initialChildSize: 0.45,
+                              maxChildSize: 1,
+                              minChildSize: 0.45,
+                              builder: (context, scrollController) {
+                                return Container(
+                                    decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 13, 13, 13),
+                                      borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(30)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            margin: const EdgeInsets.fromLTRB(
+                                                30, 30, 30, 10),
+                                            child: const Text(
+                                              'История переводов',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 131, 131, 131),
+                                                  fontSize: 25),
+                                            )),
+                                        Observer(
+                                            builder: (_) => Expanded(
+                                                  child: ListView.builder(
+                                                      controller:
+                                                          scrollController,
+                                                      itemCount: mech
                                                           .transationhistory
-                                                          .length -
-                                                      1 -
-                                                      index;
-                                                  final historyItem =
-                                                      mech.transationhistory[
-                                                          reversedIndex];
-                                                  return HistoryWidget(
-                                                    fromLang:
-                                                        historyItem.fromLang,
-                                                    onClick: () {
-                                                      mech.removefromhistory(
-                                                          reversedIndex);
-                                                    },
-                                                    text: historyItem.text,
-                                                    toLang: historyItem.toLang,
-                                                  );
-                                                }),
-                                          ))
-                                ],
-                              ));
-                        }),
+                                                          .length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        final reversedIndex =
+                                                            mech.transationhistory
+                                                                    .length -
+                                                                1 -
+                                                                index;
+                                                        final historyItem =
+                                                            mech.transationhistory[
+                                                                reversedIndex];
+                                                        return HistoryWidget(
+                                                          fromLang: historyItem
+                                                              .fromLang,
+                                                          onClick: () {
+                                                            mech.removefromhistory(
+                                                                reversedIndex);
+                                                          },
+                                                          text:
+                                                              historyItem.text,
+                                                          toLang: historyItem
+                                                              .toLang,
+                                                        );
+                                                      }),
+                                                ))
+                                      ],
+                                    ));
+                              }),
+                    )
                   ],
                 ),
               ),
