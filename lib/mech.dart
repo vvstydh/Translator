@@ -48,11 +48,16 @@ abstract class MechWork with Store {
   @action
   void addtohistory() {
     transationhistory
-        .add(HistoryData(fromLang: fromlang, text: text, toLang: tolang));
+        .add(HistoryData(fromLang: fromlang, text: text, translatedText: translatedtext, toLang: tolang));
   }
 
   @action
   void removefromhistory(int index) {
     transationhistory.removeAt(index);
+  }
+
+  @action
+  void translated(String txt){
+    translatedtext = txt;
   }
 }

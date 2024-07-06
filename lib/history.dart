@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-
-
 class HistoryWidget extends StatelessWidget {
   final String text;
+  final String translatedText;
   final String fromLang;
   final String toLang;
   final VoidCallback? onClick;
   const HistoryWidget({
-    super.key, required this.fromLang, required this.onClick,
-    required this.text, required this.toLang,
+    super.key,
+    required this.fromLang,
+    required this.onClick,
+    required this.text,
+    required this.translatedText,
+    required this.toLang,
   });
 
   @override
@@ -52,7 +55,7 @@ class HistoryWidget extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            text,
+            translatedText,
             style: const TextStyle(
                 color: Color.fromARGB(255, 131, 131, 131), fontSize: 17),
           )

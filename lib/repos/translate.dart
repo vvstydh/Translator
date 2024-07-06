@@ -5,28 +5,28 @@ import 'package:my_task_2/mech.dart';
 
 // ignore: must_be_immutable
 class Translate extends StatelessWidget {
-  final Mech mech;
+  final Mech mechi;
   String trtext = '';
-  String from = '';
-  String to = '';
 
-  Translate({super.key, required this.mech});
+  Translate({super.key, required this.mechi});
 
   @override
   Widget build(BuildContext context) {
     return Observer(
         builder: (_) => Text(
-              mech.translatedtext,
+              mechi.translatedtext,
               maxLines: 2,
               style: const TextStyle(color: Colors.white, fontSize: 20),
             ));
   }
 
   Future<void> getTranslate(String t) async {
-    if (mech.fromlang == 'русский') {
+    String from = '';
+    String to = '';
+    if (mechi.fromlang == 'русский') {
       from = 'ru';
       to = 'en';
-    } else if (mech.fromlang == 'английский') {
+    } else if (mechi.fromlang == 'английский') {
       from = 'en';
       to = 'ru';
     }
@@ -35,8 +35,8 @@ class Translate extends StatelessWidget {
         'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(t)}&langpair=$from|$to');
     debugPrint(res.data.toString());
 
-    trtext = res.data['responseData']['translatedText'];
-    mech.translatedtext = trtext;
-    debugPrint(trtext);
+    final trtext = res.data['responseData']['translatedText'];
+    mechi.translatedtext = trtext;
+    debugPrint(mechi.translatedtext);
   }
 }

@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Translate translate = Translate(mech: mech);
+    Translate translate = Translate(mechi: mech);
     return MaterialApp(
         home: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -71,9 +71,9 @@ class MainPage extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Observer(
-                                            builder: (_) =>
-                                                Expanded(child: translate.build(context))),
+                                        Expanded(
+                                            child: Observer(
+                                                builder: (_) => translate)),
                                         AnimatedOpacity(
                                             opacity: mech.istext ? 1.0 : 0.0,
                                             duration:
@@ -258,6 +258,9 @@ class MainPage extends StatelessWidget {
                                                           },
                                                           text:
                                                               historyItem.text,
+                                                          translatedText:
+                                                              historyItem
+                                                                  .translatedText,
                                                           toLang: historyItem
                                                               .toLang,
                                                         );
