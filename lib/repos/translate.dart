@@ -5,6 +5,7 @@ import 'package:my_task_2/mech.dart';
 
 // ignore: must_be_immutable
 class Translate extends StatelessWidget {
+  final Mech mech = Mech();
   String trtext = '';
   String from = '';
   String to = '';
@@ -13,18 +14,19 @@ class Translate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) => Text(
-      Mech().translatedtext,
-      maxLines: 2,
-      style: const TextStyle(color: Colors.white, fontSize: 20),
-    )); 
+    return Observer(
+        builder: (_) => Text(
+              mech.translatedtext,
+              maxLines: 2,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ));
   }
 
   Future<void> getTranslate(String t) async {
-    if (Mech().fromlang == 'русский') {
+    if (mech.fromlang == 'русский') {
       from = 'ru';
       to = 'en';
-    } else if (Mech().fromlang == 'английский') {
+    } else if (mech.fromlang == 'английский') {
       from = 'en';
       to = 'ru';
     }
@@ -34,7 +36,7 @@ class Translate extends StatelessWidget {
     debugPrint(res.data.toString());
 
     trtext = res.data['responseData']['translatedText'];
-    Mech().translatedtext = trtext;
+    mech.translatedtext = trtext;
     debugPrint(trtext);
   }
 }
