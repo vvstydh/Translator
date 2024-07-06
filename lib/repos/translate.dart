@@ -11,11 +11,11 @@ class Translate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Text(
-              mechi.translatedtext,
-              maxLines: 2,
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-            );
+    return Text(
+      mechi.translatedtext,
+      maxLines: 2,
+      style: const TextStyle(color: Colors.white, fontSize: 20),
+    );
   }
 
   Future<void> getTranslate(String t) async {
@@ -33,8 +33,7 @@ class Translate extends StatelessWidget {
         'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(t)}&langpair=$from|$to');
     debugPrint(res.data.toString());
 
-    final trtext = res.data['responseData']['translatedText'];
-    mechi.translatedtext = trtext;
+    mechi.translatedtext = res.data['responseData']['translatedText'];
     debugPrint(mechi.translatedtext);
   }
 }
