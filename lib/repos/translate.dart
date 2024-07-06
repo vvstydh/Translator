@@ -17,7 +17,7 @@ class Translate extends StatelessWidget {
     );
   }
 
-  Future<void> getTranslate(String t) async {
+  Future<void> getTranslate(String translatingtext) async {
     String from = '';
     String to = '';
     if (mechi.fromlang == 'русский') {
@@ -29,7 +29,7 @@ class Translate extends StatelessWidget {
     }
 
     final res = await Dio().get(
-        'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(t)}&langpair=$from|$to');
+        'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(translatingtext)}&langpair=$from|$to');
     debugPrint(res.data.toString());
 
     mechi.translatedtext = res.data['responseData']['translatedText'];
