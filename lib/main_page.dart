@@ -74,7 +74,7 @@ class MainPage extends HookWidget {
                                         Expanded(
                                             child: Observer(
                                                 builder: (_) => Text(
-                                                      mech.translatedText,
+                                                      mech.perevod,
                                                       maxLines: 2,
                                                       style: const TextStyle(
                                                           color: Colors.white,
@@ -107,7 +107,7 @@ class MainPage extends HookWidget {
                                                 onPressed: () {
                                                   Clipboard.setData(
                                                       ClipboardData(
-                                                          text: mech.text));
+                                                          text: mech.perevod));
                                                 },
                                                 icon: const Icon(
                                                   Icons.copy,

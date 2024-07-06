@@ -24,6 +24,21 @@ mixin _$Mech on MechWork, Store {
     });
   }
 
+  late final _$perevodAtom = Atom(name: 'MechWork.perevod', context: context);
+
+  @override
+  String get perevod {
+    _$perevodAtom.reportRead();
+    return super.perevod;
+  }
+
+  @override
+  set perevod(String value) {
+    _$perevodAtom.reportWrite(value, super.perevod, () {
+      super.perevod = value;
+    });
+  }
+
   late final _$istextAtom = Atom(name: 'MechWork.istext', context: context);
 
   @override
@@ -85,6 +100,15 @@ mixin _$Mech on MechWork, Store {
     });
   }
 
+  late final _$getTranslateAsyncAction =
+      AsyncAction('MechWork.getTranslate', context: context);
+
+  @override
+  Future<void> getTranslate(String translatingtext) {
+    return _$getTranslateAsyncAction
+        .run(() => super.getTranslate(translatingtext));
+  }
+
   late final _$MechWorkActionController =
       ActionController(name: 'MechWork', context: context);
 
@@ -133,9 +157,21 @@ mixin _$Mech on MechWork, Store {
   }
 
   @override
+  void translated(dynamic txt) {
+    final _$actionInfo =
+        _$MechWorkActionController.startAction(name: 'MechWork.translated');
+    try {
+      return super.translated(txt);
+    } finally {
+      _$MechWorkActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 text: ${text},
+perevod: ${perevod},
 istext: ${istext},
 contmargin: ${contmargin},
 fromlang: ${fromlang},

@@ -12,7 +12,7 @@ abstract class MechWork with Store {
   var text = '';
 
   @observable
-  String translatedText = '';
+  var perevod = '';
 
   @observable
   bool istext = false;
@@ -51,7 +51,7 @@ abstract class MechWork with Store {
     transationhistory.add(HistoryData(
         fromLang: fromlang,
         text: text,
-        translatedText: translatedText,
+        translatedText: perevod,
         toLang: tolang));
   }
 
@@ -61,11 +61,12 @@ abstract class MechWork with Store {
   }
 
   @action
-  void translated(String txt) {
-    translatedText = txt;
-    Logger().i(translatedText);
+  void translated(var txt) {
+    perevod = txt;
+    Logger().i(perevod);
   }
 
+  @action
   Future<void> getTranslate(String translatingtext) async {
     String from = '';
     String to = '';
@@ -76,9 +77,16 @@ abstract class MechWork with Store {
       from = 'en';
       to = 'ru';
     }
-    final res = await Dio().get(
-        'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(translatingtext)}&langpair=$from|$to');
 
-    translated(res.data['responseData']['translatedText']);
+    try {
+      final res = await Dio().get(
+          'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(translatingtext)}&langpair=$from|$to');
+
+      Logger().i('API Response: ${res.data}');
+      translated(res.data['responseData']['translatedText']);
+      Logger().i('Translated text: $perevod');
+    } catch (e) {
+      Logger().e('Error: $e');
+    }
   }
 }
