@@ -5,9 +5,8 @@ import 'package:my_task_2/mech.dart';
 // ignore: must_be_immutable
 class Translate extends StatelessWidget {
   final Mech mechi;
-  String trtext = '';
 
-  Translate({super.key, required this.mechi});
+  const Translate({super.key, required this.mechi});
 
   @override
   Widget build(BuildContext context) {
