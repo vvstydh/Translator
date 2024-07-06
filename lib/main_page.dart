@@ -249,7 +249,9 @@ class MainPage extends StatelessWidget {
                                                         final historyItem =
                                                             mech.transationhistory[
                                                                 reversedIndex];
-                                                        return HistoryWidget(
+                                                        return Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                          child:  HistoryWidget(
                                                           fromLang: historyItem
                                                               .fromLang,
                                                           onClick: () {
@@ -263,7 +265,7 @@ class MainPage extends StatelessWidget {
                                                                   .translatedText,
                                                           toLang: historyItem
                                                               .toLang,
-                                                        );
+                                                        ));
                                                       }),
                                                 ))
                                       ],
