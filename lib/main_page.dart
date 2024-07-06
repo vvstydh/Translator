@@ -3,17 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:my_task_2/history.dart';
 import 'package:flutter/services.dart';
 import 'package:my_task_2/mech.dart';
-import 'package:my_task_2/repos/translate.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends HookWidget {
   final TextEditingController clear = TextEditingController();
-  final Mech mech = Mech();
 
   MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Translate translate = Translate(mechi: mech);
+    final mech = useMemoized(() => Mech());
+
     return MaterialApp(
         home: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -73,7 +73,13 @@ class MainPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                             child: Observer(
-                                                builder: (_) => translate)),
+                                                builder: (_) => Text(
+                                                      mech.translatedText,
+                                                      maxLines: 2,
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20),
+                                                    ))),
                                         AnimatedOpacity(
                                             opacity: mech.istext ? 1.0 : 0.0,
                                             duration:
@@ -147,7 +153,7 @@ class MainPage extends StatelessWidget {
                                     onChanged: (textik) {
                                       mech.text = textik;
                                       mech.move(textik);
-                                      translate.getTranslate(textik);
+                                      mech.getTranslate(textik);
                                     },
                                     cursorColor:
                                         const Color.fromARGB(255, 46, 68, 211),
@@ -250,22 +256,29 @@ class MainPage extends StatelessWidget {
                                                             mech.transationhistory[
                                                                 reversedIndex];
                                                         return Padding(
-                                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                                          child:  HistoryWidget(
-                                                          fromLang: historyItem
-                                                              .fromLang,
-                                                          onClick: () {
-                                                            mech.removefromhistory(
-                                                                reversedIndex);
-                                                          },
-                                                          text:
-                                                              historyItem.text,
-                                                          translatedText:
-                                                              historyItem
-                                                                  .translatedText,
-                                                          toLang: historyItem
-                                                              .toLang,
-                                                        ));
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        10),
+                                                            child:
+                                                                HistoryWidget(
+                                                              fromLang:
+                                                                  historyItem
+                                                                      .fromLang,
+                                                              onClick: () {
+                                                                mech.removefromhistory(
+                                                                    reversedIndex);
+                                                              },
+                                                              text: historyItem
+                                                                  .text,
+                                                              translatedText:
+                                                                  historyItem
+                                                                      .translatedText,
+                                                              toLang:
+                                                                  historyItem
+                                                                      .toLang,
+                                                            ));
                                                       }),
                                                 ))
                                       ],

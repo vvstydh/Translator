@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:my_task_2/historydata.dart';
+import 'package:logger/logger.dart';
 
 part 'mech.g.dart';
 
@@ -10,7 +12,7 @@ abstract class MechWork with Store {
   var text = '';
 
   @observable
-  var translatedtext = '';
+  String translatedText = '';
 
   @observable
   bool istext = false;
@@ -25,7 +27,6 @@ abstract class MechWork with Store {
   var tolang = 'английский';
 
   ObservableList<HistoryData> transationhistory = ObservableList<HistoryData>();
-  
 
   @action
   void move(var texting) {
@@ -47,12 +48,37 @@ abstract class MechWork with Store {
 
   @action
   void addtohistory() {
-    transationhistory
-        .add(HistoryData(fromLang: fromlang, text: text, translatedText: translatedtext, toLang: tolang));
+    transationhistory.add(HistoryData(
+        fromLang: fromlang,
+        text: text,
+        translatedText: translatedText,
+        toLang: tolang));
   }
 
   @action
   void removefromhistory(int index) {
     transationhistory.removeAt(index);
+  }
+
+  @action
+  void translated(String txt) {
+    translatedText = txt;
+    Logger().i(translatedText);
+  }
+
+  Future<void> getTranslate(String translatingtext) async {
+    String from = '';
+    String to = '';
+    if (fromlang == 'русский') {
+      from = 'ru';
+      to = 'en';
+    } else if (fromlang == 'английский') {
+      from = 'en';
+      to = 'ru';
+    }
+    final res = await Dio().get(
+        'https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(translatingtext)}&langpair=$from|$to');
+
+    translated(res.data['responseData']['translatedText']);
   }
 }
