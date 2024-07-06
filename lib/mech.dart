@@ -55,9 +55,4 @@ abstract class MechWork with Store {
   void removefromhistory(int index) {
     transationhistory.removeAt(index);
   }
-
-  @action
-  void translated(String txt){
-    translatedtext = txt;
-  }
 }

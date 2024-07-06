@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:my_task_2/mech.dart';
 
 // ignore: must_be_immutable
@@ -12,12 +11,11 @@ class Translate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-        builder: (_) => Text(
+    return  Text(
               mechi.translatedtext,
               maxLines: 2,
               style: const TextStyle(color: Colors.white, fontSize: 20),
-            ));
+            );
   }
 
   Future<void> getTranslate(String t) async {
