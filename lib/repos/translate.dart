@@ -5,12 +5,12 @@ import 'package:my_task_2/mech.dart';
 
 // ignore: must_be_immutable
 class Translate extends StatelessWidget {
-  final Mech mech = Mech();
+  final Mech mech;
   String trtext = '';
   String from = '';
   String to = '';
 
-  Translate({super.key});
+  Translate({super.key, required this.mech});
 
   @override
   Widget build(BuildContext context) {

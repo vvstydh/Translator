@@ -13,6 +13,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Translate translate = Translate(mech: mech);
     return MaterialApp(
         home: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -72,7 +73,7 @@ class MainPage extends StatelessWidget {
                                       children: [
                                         Observer(
                                             builder: (_) =>
-                                                Expanded(child: Translate())),
+                                                Expanded(child: translate.build(context))),
                                         AnimatedOpacity(
                                             opacity: mech.istext ? 1.0 : 0.0,
                                             duration:
@@ -146,7 +147,7 @@ class MainPage extends StatelessWidget {
                                     onChanged: (textik) {
                                       mech.text = textik;
                                       mech.move(textik);
-                                      Translate().getTranslate(textik);
+                                      translate.getTranslate(textik);
                                     },
                                     cursorColor:
                                         const Color.fromARGB(255, 46, 68, 211),
