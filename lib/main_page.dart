@@ -71,15 +71,20 @@ class MainPage extends HookWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(
+                                        SizedBox(
+                                          height: 50,
+                                          width: 300,
+                                          child: SingleChildScrollView(
                                             child: Observer(
                                                 builder: (_) => Text(
                                                       mech.perevod,
-                                                      maxLines: 2,
+                                                      softWrap: true,
                                                       style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 20),
-                                                    ))),
+                                                    )),
+                                          ),
+                                        ),
                                         AnimatedOpacity(
                                             opacity: mech.istext ? 1.0 : 0.0,
                                             duration:
